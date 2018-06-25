@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="backwardManagementModule"
+  id="myeclipse.1503791384141"
+  context-root="/backwardManagementModule"
+  j2ee-spec="5.0"
+  archive="backwardManagementModule.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
