@@ -1,0 +1,52 @@
+package com.yanghuan.web;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.yanghuan.dao.BackwardManagementDao;
+import com.yanghuan.model.ModelAndView;
+import com.yanghuan.model.Userinfo;
+
+public class AllUserinfoServlet extends HttpServlet {
+	private static final String CHARSET = "UTF-8";
+	private	BackwardManagementDao	backwardManagement=new	BackwardManagementDao();
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("text/html;localhost:"+CHARSET);
+		request.setCharacterEncoding(CHARSET);
+		int act=0;
+		String strAct=request.getParameter("act");
+		act=Integer.parseInt(strAct);
+		ModelAndView modelAndView = new ModelAndView(request, response);
+		switch (act) {
+			case 1://查全部用户信息
+				modelAndView.addObject("userinfos",backwardManagement.getAll())
+				.setViewName("../allUserinfo.jsp")
+				.forward();
+				break;
+			case 2://查已开通用户信息
+				modelAndView.addObject("userinfos",backwardManagement.getAllDredge())
+				.setViewName("../allUserinfoDredge.jsp")
+				.forward();
+			case 3://查未开通用户信息
+				modelAndView.addObject("userinfos",backwardManagement.getAllNotDredge())
+				.setViewName("../allUserinfo.jsp")
+				.forward();
+			case 4://申请开通公众空间
+			default:
+				
+		}
+	}
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+	public void init() throws ServletException {
+	}
+
+}

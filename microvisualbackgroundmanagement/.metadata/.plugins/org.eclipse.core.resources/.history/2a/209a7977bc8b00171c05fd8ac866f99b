@@ -1,0 +1,74 @@
+package com.yanghuan.web;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.yanghuan.dao.BackwardManagementDao;
+import com.yanghuan.model.ModelAndView;
+import com.yanghuan.model.User;
+
+public class AllUserinfoServlet extends HttpServlet {
+	private static final String CHARSET = "UTF-8";
+	private	BackwardManagementDao	backwardManagement=new	BackwardManagementDao();
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int act=0;
+		String strAct=request.getParameter("act");
+		act=Integer.parseInt(strAct);
+		ModelAndView modelAndView = new ModelAndView(request, response);
+		switch (act) {
+			case 1://查全部用户信息
+				modelAndView.addObject("userinfos",backwardManagement.getAll())
+							.setViewName("../allUserinfo/allUserinfo.jsp")
+							.forward();
+				break;
+			case 2://查已开通用户信息
+				modelAndView.addObject("userinfos",backwardManagement.getAllDredge())
+							.setViewName("../allUserinfo/allUserinfoDredge.jsp")
+							.forward();
+				break;
+			case 3://查未开通用户信息
+				modelAndView.addObject("userinfos",backwardManagement.getAllNotDredge())
+							.setViewName("../allUserinfo/allUserinfoNotDredge.jsp")
+							.forward();
+				break;
+			case 4://申请开通公众空间
+				modelAndView.addObject("userinfos",backwardManagement.getAll())
+							.setViewName("../allUserinfo/applicationPublicSpace.jsp")
+							.forward();
+				break;
+			case 5://通过QQ查询用户
+				modelAndView.addObject("userinfos",backwardManagement.getUserinfoByQQ(request.getParameter("QQNumber")))
+							.setViewName("../allUserinfo/allUserinfo.jsp")
+							.forward();
+				break;
+			case 6://通过提交时间查询用户
+				Date submissiontime=null;
+				String time=request.getParameter("time");
+				if(time!=null&&time.matches("//d{4}-//d{2}-//d{2}")){
+					submissiontime=Date.valueOf(time);
+					modelAndView.addObject("userinfos",backwardManagement.getUserinfoByTime(submissiontime))
+					.setViewName("../allUserinfo/allUserinfo.jsp")
+					.forward();
+				}
+				}
+				request.setAttribute(name, o);
+				modelAndView.setViewName("../allUserinfo/applicationPublicSpace.jsp")
+				.forward();
+				break;
+		}
+	}
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+	public void init() throws ServletException {
+	}
+
+}

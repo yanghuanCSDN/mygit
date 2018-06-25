@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <display-name></display-name>	
+  <!-- 	过滤器配置 -->
+  	<context-param>
+  		<param-name>charset</param-name>
+  		<param-value>UTF-8</param-value>
+  	</context-param>
+	<filter>
+		<filter-name>CharSetFilter</filter-name>
+		<filter-class>com.yanghuan.web.CharSetFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharSetFilter</filter-name>
+		<url-pattern>/servlet/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>AllUserinfoServlet</servlet-name>
+		<servlet-class>com.yanghuan.web.AllUserinfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AllUserinfoServlet</servlet-name>
+		<url-pattern>/servlet/AllUserinfoServlet</url-pattern>
+	</servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

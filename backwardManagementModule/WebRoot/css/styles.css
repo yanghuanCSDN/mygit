@@ -1,0 +1,123 @@
+		*{
+			font-size: 16px ;
+			font-family:serif sans-serif;
+		}
+		a{
+			font-weight: normal;
+			text-decoration: none;
+			color: #444;
+		}
+		a:hover{
+			text-decoration:underline;
+			color:red;
+		}
+		div {
+			border: 1px solid #D35D1F;
+		}
+		.main{
+			width: 960px;
+			margin: 10px auto;
+		}
+		.title{
+			height: 120px;
+			font-family:"Microsoft YaHei",Î¢ÈíÑÅºÚ,"MicrosoftJhengHei",»ªÎÄÏ¸ºÚ,STHeiti,MingLiu ;
+			font-size: 56px;
+			line-height:120px;
+			background:-webkit-linear-gradient(left,#F29564,#fff);
+			text-indent: 50px;
+		}
+		#tip{
+			float: right;
+			font-size: 14px;
+			font-weight: bold;
+			margin-right: 20px;
+			margin-top: 40px;
+		}
+		.nav{
+			float: left;
+			width: 200px;
+			height: 500px;
+		}
+		.nav ul{
+			list-style: none;
+		}
+		.nav li{
+			margin-top: 10px;
+		}
+		.nav>ul>li{
+			font-weight: bold;
+		}
+		.content{
+			margin-left:200px;
+			height: 500px;
+			text-align: center;
+		}
+		.content table {
+			width: 99%;
+			border: 2px solid #D35D1F;
+			border-collapse:collapse;
+			margin: 0 auto;
+		}
+		.content th {
+			border: 1px solid #D35D1F;
+			background-color:#F29564;
+			color:white;
+			height: 28px;
+		}
+		.content td {
+			border: 1px solid #D35D1F;
+			height: 28px;
+		}
+		.content h1 {
+			font-size: 20px;
+		}
+		.center{
+			text-align: center;
+		}
+		.right{
+			text-align: right;
+		}
+		.btn{
+			width: 70px;
+			margin: 5px 10px;
+		}
+		
+		#drinkList{
+			list-style: none;
+		}
+		#drinkList li{
+			float: left;
+		}
+		#drinkList img{
+			float: left;
+			border: 1px solid #D35D1F;
+			margin: 5px;
+		}
+		#drinkList div{
+			width: 160px;
+			margin: 5px;
+		}
+		#drinkList p{
+			font-size: 12px;
+			font-weight: bold;
+			text-align: left;
+		}
+		#drinkList p.store{
+			font-size: 14px;
+			font-weight: bold;
+			text-align: center;
+			clear: both;
+		}
+		#drinkList p.store a{
+			background-color: #D35D1F;
+			color: white;
+			padding: 5px 10px;
+			border-radius:10px;
+			margin-left: 10px;
+			text-decoration: none;
+		}
+		#drinkList p.store a:hover{
+			background-color:#999;
+			color: #D35D1F;
+			text-decoration:underline;
+		}

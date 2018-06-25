@@ -1,0 +1,51 @@
+package com.yanghuan.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.yanghuan.dbmanager.DbManager;
+import com.yanghuan.model.Userinfo;
+
+public class BackwardManagementDao {
+	DbManager	dbManager=new DbManager();
+	//查询所有用户信息
+	public List<Userinfo> getAll(){
+		String sql="select personid, qqnumber, personsignature, realname," +
+				" 	idcard, cellphonenumber, judgeopened, submissiontime " +
+				"	from userinfo";
+		ResultSet	set=dbManager.executeQuary(sql);
+		try {
+			List<Userinfo>	userinfos=new	ArrayList<Userinfo>();
+			while(set.next()){
+				userinfos.add(
+						new  Userinfo(
+								set.getInt("personid"),
+								set.getString("qqnumber"),
+								set.getString("personsignature"),
+								set.getString("realname"), 
+								set.getString("idcard"),
+								set.getString("cellphonenumber"), 
+								set.getInt("judgeopened"),
+								set.getDate("submissiontime")
+								)
+						);
+			int t=set.getInt("PersonId");
+				System.out.println(set.getString("qQNumber"));
+				System.out.println(set.getString("personSignature"));
+				System.out.println(set.getString("realName"));
+				System.out.println(set.getString("idCard"));
+				System.out.println(set.getString("cellPhoneNumber"));
+				System.out.println(set.getInt("judgeOpened"));
+				System.out.println(set.getDate("submissionTime"));
+			}
+				return	userinfos;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		  }
+				return null;
+	}
+}
+	
+

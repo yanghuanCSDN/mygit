@@ -1,0 +1,7 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<ul>
+		<li><a href="servlet/EmpServlet?act=1">账号列表</a></li>
+		<li><a href="servlet/EmpServlet?act=1">已开通用户</a></li>
+		<li><a href="servlet/EmpServlet?act=1">未开通用户</a></li>
+		<li><a href="servlet/EmpServlet?act=1">申请开通公众空间</a></li>
+</ul>

@@ -1,0 +1,170 @@
+package com.jiuzhong.web;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.jiuzhong.dao.EmpDao;
+import com.jiuzhong.model.Emp;
+import com.jiuzhong.util.ModelAndView;
+
+public class EmpServlet extends HttpServlet {
+	private static final String CHARSET = "UTF-8";
+	private EmpDao empDao=new EmpDao();
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+//		1.jsp乱码
+//		2.servlet固定内容乱码
+//		3.servlet post参数乱码
+//		4.servlet get参数乱码
+//		iso8859-1
+//		String p1=request.getParameter("p1");
+//		byte[] bytes = p1.getBytes("iso-8859-1");
+//		p1=new String(bytes, "UTF-8");
+//		5.在servler.xml配置URIEncoding属性
+		int act=0;
+		String strAct=request.getParameter("act");
+		act=Integer.parseInt(strAct);
+		
+		String id=request.getParameter("id");
+		String job=request.getParameter("job");
+		String name=request.getParameter("name");
+		String password=request.getParameter("password");
+		String mob=request.getParameter("mob");
+		
+		Emp emp=fillEmp(id, job, name, password, mob);
+		
+		ModelAndView modelAndView = new ModelAndView(request, response);
+		switch (act) {
+			case 1://新增
+				add(modelAndView).forward();
+				break;
+			case 2://新增保存
+				if(empDao.save(emp)){
+					modelAndView
+						.addObject("msg", "保存成功")
+						.setViewName("EmpServlet?act=6")
+						.forward();
+				}else {
+					add(modelAndView)
+						.addObject("msg", "保存失败")
+						.addObject("emp", emp)
+						.forward();
+				}
+				break;
+			case 3://删除
+				modelAndView
+						.addObject("msg",
+								empDao.delete(emp)?"删除成功":"删除失败")
+						.setViewName("EmpServlet?act=6")
+						.forward();
+				break;
+			case 4://修改
+				modelAndView
+				.addObject("act", 5)
+				.addObject("emp",
+						empDao.get(emp.getId()))
+				.setViewName("../emp/input.jsp")
+				.forward();
+				break;
+			case 5://修改保存
+				if(empDao.update(emp)){
+					modelAndView
+						.addObject("msg", "保存成功")
+						.setViewName("EmpServlet?act=6")
+						.forward();
+				}else {
+					add(modelAndView)
+						.addObject("act", 5)
+						.addObject("msg", "保存失败")
+						.addObject("emp", emp)
+						.setViewName("../emp/input.jsp")
+						.forward();
+				}
+				break;
+			case 7://登录
+				String loginName=request.getParameter("loginName");
+				emp=empDao.login(loginName, emp.getPassword());
+				if(emp!=null){//登录成功
+					if("1".equals(request.getParameter("saveFlag"))){
+	//					Cookie是服务端，命令浏览器上写入操作系统的一个文本文件
+							Cookie cookie=new Cookie("userName", loginName);
+							cookie.setMaxAge(7*24*60*60);//cookie的生命时间（秒）
+							cookie.setPath("/");//不具体指明，只用当前目录的servlet可以获得cookie
+	//					cookie理论上不能被其他网站访问（跨域访问）
+							response.addCookie(cookie);
+					}else {
+						Cookie cookie=new Cookie("userName", "");
+						cookie.setMaxAge(0);//清楚cookie
+						cookie.setPath("/");
+						response.addCookie(cookie);
+					}
+					modelAndView
+					.addObject2Session("emp", emp);
+					if(emp.getJob()==0){
+						modelAndView.setViewName("EmpServlet?act=6");
+					}else {
+						modelAndView.setViewName("StoreServlet?act=1");
+					}
+					modelAndView.forward();
+				}else {//失败
+					modelAndView.addObject("msg",
+							"您的用户名或密码有误请重新登录")
+					.redirect();
+				}
+				break;
+			case 8://安全退出
+				request.getSession().invalidate();//让session失效
+//				request.getSession().removeAttribute("emp");
+				modelAndView.addObject("msg", "感谢使用再见")
+					.setViewName("../login.jsp")
+					.forward();
+				break;
+			default://6查全部
+				modelAndView.addObject("emps",empDao.getAll())
+				.setViewName("../emp/list.jsp")
+				.forward();
+				break;
+		}
+		//请求路由
+//		新增
+//		新增保存（post）
+//		删除
+//		修改
+//		修改保存（post）
+//		查全部
+//		登录（post）
+//		安全退出
+	}
+
+	private ModelAndView add(ModelAndView modelAndView) throws ServletException,
+			IOException {
+		modelAndView
+			.addObject("act", 2)
+			.setViewName("../emp/input.jsp");
+		return modelAndView;
+	}
+	private Emp fillEmp(String id, String job, String name, String password,
+			String mob) {
+		Emp emp=new Emp();
+		if(id!=null && !"".equals(id)){
+			emp.setId(Integer.parseInt(id));
+		}
+		if(job!=null && !"".equals(job)){
+			emp.setJob(Integer.parseInt(job));
+		}
+		emp.setName(name);
+		emp.setPassword(password);
+		emp.setMob(mob);
+		return emp;
+	}
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}

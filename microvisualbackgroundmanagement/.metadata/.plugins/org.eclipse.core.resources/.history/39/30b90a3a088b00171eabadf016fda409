@@ -1,0 +1,95 @@
+package com.yanghuan.model;
+import java.sql.Date;
+public class Userinfo {
+	private int PersonId;
+	private String QQNumber;
+	private String PersonSignature;
+	private String RealName;
+	private String IdCard;
+	private String CellPhoneNumber;
+	private int JudgeOpened;
+	private Date SubmissionTime;
+	public Userinfo(int personId, String qQNumber, String personSignature,
+			String realName, String idCard, String cellPhoneNumber,
+			int judgeOpened, Date submissionTime) {
+		super();
+		PersonId = personId;
+		QQNumber = qQNumber;
+		PersonSignature = personSignature;
+		RealName = realName;
+		IdCard = idCard;
+		CellPhoneNumber = cellPhoneNumber;
+		JudgeOpened = judgeOpened;
+		SubmissionTime = submissionTime;
+	}
+	public Userinfo() {
+		super();
+	}
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + PersonId;
+		return result;
+	}
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Userinfo other = (Userinfo) obj;
+		if (PersonId != other.PersonId)
+			return false;
+		return true;
+	}
+	public int getPersonId() {
+		return PersonId;
+	}
+	public void setPersonId(int personId) {
+		PersonId = personId;
+	}
+	public String getQQNumber() {
+		return QQNumber;
+	}
+	public void setQQNumber(String qQNumber) {
+		QQNumber = qQNumber;
+	}
+	public String getPersonSignature() {
+		return PersonSignature;
+	}
+	public void setPersonSignature(String personSignature) {
+		PersonSignature = personSignature;
+	}
+	public String getRealName() {
+		return RealName;
+	}
+	public void setRealName(String realName) {
+		RealName = realName;
+	}
+	public String getIdCard() {
+		return IdCard;
+	}
+	public void setIdCard(String idCard) {
+		IdCard = idCard;
+	}
+	public String getCellPhoneNumber() {
+		return CellPhoneNumber;
+	}
+	public void setCellPhoneNumber(String cellPhoneNumber) {
+		CellPhoneNumber = cellPhoneNumber;
+	}
+	public int getJudgeOpened() {
+		return JudgeOpened;
+	}
+	public void setJudgeOpened(int judgeOpened) {
+		JudgeOpened = judgeOpened;
+	}
+	public Date getSubmissionTime() {
+		return SubmissionTime;
+	}
+	public void setSubmissionTime(Date submissionTime) {
+		SubmissionTime = submissionTime;
+	}
+	 
+}

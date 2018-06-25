@@ -1,0 +1,73 @@
+<%@page import="com.yanghuan.model.User"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="/${pageContext.request.contextPath}">
+    <title>申请公众空间</title>
+    <script type="text/javascript">
+    	function updateByTime(){
+    		var form=document.getElementById('form');
+			form.action="servlet/StoreServlet?act=3";
+			form.submit();
+		}
+    	function updateByQQNumber(){
+    	var form=document.getElementById('form');
+			form.action="servlet/StoreServlet?act=3";
+			form.submit();
+		}
+    	function dredge(){
+		}
+    	function refuse(){
+		}
+    </script>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+  </head>
+	  <body>
+	  	<h1></h1>
+	  	<form id="form" action="servlet/AllUserinfoServlet" method="post">
+	  	<h1>检索：
+    		<input  size="20" name="time" type="text">
+    		<input onclick="updateByTime()" type="button" value="时间">
+    		<input size="20" name="QQNumber" type="text">
+		 	<input onclick="updateByQQNumber()"	type="button" value="QQ号码">
+		</h1>
+    	<table border="1" width="90%">
+			<tr>
+				<th>申请列表</th>
+				<th>提交时间</th>
+				<th>用户Id</th>
+				<th>QQ号码</th>
+				<th>个性签名</th>
+				<th>真实姓名</th>
+				<th>身份证号码</th>
+				<th>手机号码</th>
+				<th>是否已开通公众空间</th>
+				<th>操作</th>
+			</tr>
+			<c:forEach var="userinfo" items="${userinfos}">
+				<tr>
+					<td>${userinfo.judgeOpened==0?"开通":"待开通"}</td>
+					<td>${userinfo.submissionTime}</td>
+					<td>${userinfo.personId}</td> 
+					<td>${userinfo.QQNumber}</td>
+					<td>${userinfo.personSignature}</td>
+					<td>${userinfo.realName}</td>
+					<td>${userinfo.idCard}</td>
+					<td>${userinfo.cellPhoneNumber}</td>
+					<td>${userinfo.judgeOpened==0?"是":"否"}</td>
+					<td><form action="servlet/AllUserinfoServlet" method="post">
+					    	<input onclick="dredge()"	type="submit"  name="submit" value="开通">
+					    	<input onclick="refuse()"	type="reset" name="reset" value="拒绝">
+	    			</form></td>
+				</tr>
+			</c:forEach>
+		</table>
+		</form>
+	  </body>
+</html>

@@ -1,0 +1,60 @@
+package com.yanghuan.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.yanghuan.dbmanager.DbManager;
+import com.yanghuan.model.Userinfo;
+
+public class BackwardManagementDao {
+	DbManager	dbManager=new DbManager();
+	//查询所有用户信息
+	public List<Userinfo> getAll(){
+		String sql="select personid, qqnumber, personsignature, realname," +
+				" 	idcard, cellphonenumber, judgeopened, submissiontime " +
+				"	from userinfo";
+		ResultSet	set=dbManager.executeQuary(sql);
+		List<Userinfo> userinfos=new GetList().getList(set);
+		return	userinfos;
+	}
+	//查询已开通公众空间用户信息
+	public List<Userinfo> getAllDredge(){
+		String sql="select personid, qqnumber, personsignature, realname," +
+				" 	idcard, cellphonenumber, judgeopened, submissiontime " +
+				"	from userinfo  where JudgeOpened=0";
+		ResultSet	set=dbManager.executeQuary(sql);
+		List<Userinfo> userinfos=new GetList().getList(set);
+		return	userinfos;
+	}
+	//查询未开通公众空间用户信息
+	public List<Userinfo> getAllNotDredge(){
+		String sql="select personid, qqnumber, personsignature, realname," +
+				" 	idcard, cellphonenumber, judgeopened, submissiontime " +
+				"	from userinfo  where JudgeOpened=1";
+		ResultSet	set=dbManager.executeQuary(sql);
+		List<Userinfo> userinfos=new GetList().getList(set);
+		return	userinfos;
+	}
+	//申请开通公众空间
+	public Boolean ApplicationPublicSpace(Userinfo userinfo){
+		String sql="update userinfo" +
+					" set judgeopened = ?," +
+					" submissiontime =?" +
+					" where personid = ?";
+		int	count=dbManager.executeUpdate(
+				sql,
+				userinfo.getJudgeOpened(),
+				userinfo.getSubmissionTime(),
+				userinfo.getPersonId()
+				);
+		if(count==1){
+			return true;
+		}
+			return false;
+		
+	}
+}
+	
+

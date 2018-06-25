@@ -1,0 +1,73 @@
+package com.yanghuan.dao;
+
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.yanghuan.dbmanager.DbManager;
+import com.yanghuan.model.User;
+
+public class BackwardManagementDao {
+	DbManager	dbManager=new DbManager();
+	//查询所有用户信息
+	public List<User> getAll(){
+		String sql="select personid, qqnumber, personsignature, realname," +
+				" 	idcard, cellphonenumber, judgeopened, submissiontime " +
+				"	from userinfo";
+		ResultSet	set=dbManager.executeQuary(sql);
+		List<User> userinfos=new GetList().getList(set);
+		return	userinfos;
+	}
+	//查询已开通公众空间用户信息
+	public List<User> getAllDredge(){
+		String sql="select personid, qqnumber, personsignature, realname," +
+				" 	idcard, cellphonenumber, judgeopened, submissiontime " +
+				"	from userinfo  where JudgeOpened=0";
+		ResultSet	set=dbManager.executeQuary(sql);
+		List<User> userinfos=new GetList().getList(set);
+		return	userinfos;
+	}
+	//查询未开通公众空间用户信息
+	public List<User> getAllNotDredge(){
+		String sql="select personid, qqnumber, personsignature, realname," +
+				" 	idcard, cellphonenumber, judgeopened, submissiontime " +
+				"	from userinfo  where JudgeOpened=1";
+		ResultSet	set=dbManager.executeQuary(sql);
+		List<User> userinfos=new GetList().getList(set);
+		return	userinfos;
+	}
+	//通过qqnumber查询申请用户信息
+	public User getUserinfoByQQ(String qqnumber){
+		String sql="select personid, qqnumber, personsignature, realname," +
+				" 	idcard, cellphonenumber, judgeopened, submissiontime " +
+				"	from userinfo  where qqnumber=?";
+		ResultSet	set=dbManager.executeQuary(sql, qqnumber);
+		User user=new GetOneUser().getOneUser(set);
+		return user;
+	}
+	//通过submissiontime查询申请用户信息
+		public User getUserinfoByTime(Date submissiontime){
+			String sql="select personid, qqnumber, personsignature, realname," +
+					" 	idcard, cellphonenumber, judgeopened, submissiontime " +
+					"	from userinfo  where submissiontime=?";
+			ResultSet	set=dbManager.executeQuary(sql, submissiontime);
+			User user=new GetOneUser().getOneUser(set);
+			return user;
+		}
+	//申请是否开通公众空间
+	public Boolean ApplicationPublicSpace(int judgeopenedint){
+		String sql="update userinfo" +
+					" set judgeopened = ?," +
+					" submissiontime =?" +
+					" where personid = ?  or submissiontime=?";
+		int	count=dbManager.executeUpdate(sql,judgeopenedint);
+		if(count==1){
+			return true;
+		}
+			return false;
+	}
+}
+	
+
