@@ -1,2 +1,0 @@
-INDEX VERSION 1.122+C:\Users\Administrator\Desktop\microvisualbackgroundmanagement\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-122444003.index

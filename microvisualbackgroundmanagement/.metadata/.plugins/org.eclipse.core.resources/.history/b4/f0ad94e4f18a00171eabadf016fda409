@@ -1,7 +1,0 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<ul>
-		<h1><a href="servlet/AllUserinfoServlet?act=1">账号列表</a></h1></br>
-		<h1><a href="servlet/AllUserinfoServlet?act=2">已开通用户</a></h1></br>
-		<h1><a href="servlet/AllUserinfoServlet?act=3">未开通用户</a></h1></br>
-		<h1><a href="servlet/AllUserinfoServlet?act=4">申请开通公众空间</a></h1></br>
-</ul>
