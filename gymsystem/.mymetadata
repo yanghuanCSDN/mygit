@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="gymsystem"
+  id="myeclipse.1509527225336"
+  context-root="/gymsystem"
+  j2ee-spec="5.0"
+  archive="gymsystem.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

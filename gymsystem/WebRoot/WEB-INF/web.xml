@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name></display-name>
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:oracle:thin:@localhost:1521:XE</param-value>
+  </context-param>
+  <context-param>
+    <param-name>user</param-name>
+    <param-value>yanghuan</param-value>
+  </context-param>
+  <context-param>
+    <param-name>password</param-name>
+    <param-value>123456</param-value>
+  </context-param>
+  <context-param>
+    <param-name>charset</param-name>
+    <param-value>UTF-8</param-value>
+  </context-param>
+  <context-param>
+    <param-name>saveDir</param-name>
+    <param-value>upload</param-value>
+  </context-param>
+  <listener>
+    <listener-class>com.yanghuan.dbmanager.DbManager</listener-class>
+  </listener>
+  <filter>
+    <filter-name>CharSetFilter</filter-name>
+    <filter-class>com.yanghuan.servlet.CharSetFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharSetFilter</filter-name>
+    <url-pattern>/servlet/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.yanghuan.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ManagerServlet</servlet-name>
+    <servlet-class>com.yanghuan.servlet.ManagerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CoachServlet</servlet-name>
+    <servlet-class>com.yanghuan.servlet.CoachServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ForegroundPeopleServlet</servlet-name>
+    <servlet-class>com.yanghuan.servlet.ForegroundPeopleServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ConsumerServlet</servlet-name>
+    <servlet-class>com.yanghuan.servlet.ConsumerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>EquipmentServlet</servlet-name>
+    <servlet-class>com.yanghuan.servlet.EquipmentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/servlet/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ManagerServlet</servlet-name>
+    <url-pattern>/servlet/ManagerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CoachServlet</servlet-name>
+    <url-pattern>/servlet/CoachServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ForegroundPeopleServlet</servlet-name>
+    <url-pattern>/servlet/ForegroundPeopleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ConsumerServlet</servlet-name>
+    <url-pattern>/servlet/ConsumerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EquipmentServlet</servlet-name>
+    <url-pattern>/servlet/EquipmentServlet</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
